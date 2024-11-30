@@ -4,9 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      a {
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+        background-color: rgb(174, 141, 78);
+        padding: 10px;
+
+      }
+      .container{
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+        height: 100vh;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
-    <a href="/signup">add user</a>
-    <a href="/users">Show users</a>
+    <div class="container">
+      <a href="/signup">add user</a>
+      <a href="/show">Show users</a>
+    </div>
   </body>
 </html>

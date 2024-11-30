@@ -27,7 +27,7 @@ client
 
 // !================================================================
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   if (req.method === "GET") {
     console.log(req.url);
     // Render User Listing Page
@@ -41,12 +41,61 @@ const server = http.createServer((req, res) => {
           res.end(data);
         }
       });
+    } else if (req.url === "/show") {
+      console.log("show users route");
+
+      try {
+        const fetchMOngodata = async () => {
+          const collection = db.collection(collectionName);
+          let users = await collection.find({});
+          return users;
+        };
+        const data = await fetchMOngodata();
+
+        const users = await data.toArray();
+        if (users.length > 0) {
+          let usersListHtml = `
+          <html>
+        <head>
+          <title>User List</title>
+        </head>
+        <body>
+          <h1>User List</h1>
+
+          <ul>
+            ${users
+              .map(
+                (user) => `<li>Name: ${user.name} | Email: ${user.email}</li>`
+              )
+              .join("")}
+          </ul>
+          <a href="/">Back to Home</a>
+        </body>
+      </html>`;
+
+          res.writeHead(200, "content-type", "text/html");
+          res.end(usersListHtml);
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
+      //   if (err) {
+      //     res.writeHead(500, { "contente-type": "application/json" });
+      //     res.end("error loading users");
+      //   } else {
+
+      //     `;
+      //     res.writeHead(200, { "Content-Type": "text/html" });
+      //     res.end(usersListHtml);
+      //   }
+      // });
     }
 
     // !render signup page
 
     // Render Add User Page
     else if (req.url === "/signup") {
+      console.log("signup form");
       fs.readFile(path.join(PUBLIC_DIR, "signup.html"), "utf8", (err, data) => {
         if (err) {
           res.writeHead(500);
@@ -61,17 +110,7 @@ const server = http.createServer((req, res) => {
     // !render user page
 
     // Get All Users
-    else if (req.url === "/users") {
-      fs.readFile(path.join(PUBLIC_DIR, "user.html"), "utf8", (err, data) => {
-        if (err) {
-          res.writeHead(500);
-          res.end("Error loading users");
-        } else {
-          res.writeHead(200, { "Content-Type": "text/html" });
-          res.end(data);
-        }
-      });
-    } else if (req.url === "/style.css") {
+    else if (req.url === "/style.css") {
       // Correctly serve the CSS file
       const cssFilePath = path.join(__dirname, "public", "style.css");
       fs.readFile(cssFilePath, "utf8", (err, data) => {
@@ -127,7 +166,7 @@ const server = http.createServer((req, res) => {
           }
         });
 
-        // ?======================================= =============================================================
+        // ?====================================================================================================
 
         fs.readFile(DATA_FILE, "utf-8", (err, data) => {
           let users = [];
@@ -155,6 +194,6 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(3000, () =>
-  console.log("Server is running on http://localhost:3000")
+server.listen(9000, () =>
+  console.log("Server is running on http://localhost:9000")
 );

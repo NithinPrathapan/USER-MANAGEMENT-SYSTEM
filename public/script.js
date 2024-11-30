@@ -24,7 +24,6 @@ async function handleSignup(e) {
       const result = await response.json();
       console.log("Success response:", result);
 
-      window.location.href = "/users";
     } else {
       console.error("Error response:", response.statusText);
       const errorData = await response.json();

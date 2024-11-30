@@ -69,5 +69,23 @@
     "email": "np@gmail.com",
     "password": "77676",
     "_id": "673ebc20869f9b1844a98482"
+  },
+  {
+    "name": "nithin",
+    "email": "nithinprathapan32567@gmail.com",
+    "password": "555",
+    "_id": "674675c431992784d9dd9476"
+  },
+  {
+    "name": "nithin333",
+    "email": "nithinprathapan32567@gmail.com",
+    "password": "123",
+    "_id": "674a7a96d4fccadaab9296e8"
+  },
+  {
+    "name": "hai",
+    "email": "hello@gmail.com",
+    "password": "123",
+    "_id": "674ab1f8533fae1342e9e024"
   }
 ]
