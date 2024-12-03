@@ -4,10 +4,11 @@ async function handleSignup(e) {
   const form = document.getElementById("signupForm");
 
   const formData = new FormData(form);
-  const signupData = {
+  console.log("hai"); 
+  const signupData =  {
     name: formData.get("name"),
     email: formData.get("email"),
-    password: formData.get("password"),
+    password: formData.get("password"), 
   };
 
   console.log(signupData);
@@ -23,7 +24,6 @@ async function handleSignup(e) {
     if (response.ok) {
       const result = await response.json();
       console.log("Success response:", result);
-
     } else {
       console.error("Error response:", response.statusText);
       const errorData = await response.json();
