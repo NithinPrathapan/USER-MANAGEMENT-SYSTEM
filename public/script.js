@@ -4,12 +4,13 @@ async function handleSignup(e) {
   const form = document.getElementById("signupForm");
 
   const formData = new FormData(form);
-  console.log("hai"); 
   const signupData =  {
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"), 
   };
+
+
 
   console.log(signupData);
   try {
